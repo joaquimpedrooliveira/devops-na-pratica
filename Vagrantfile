@@ -16,6 +16,10 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "hashicorp/precise32"
 
+  #Aumenta a memória padrão da VM
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+  end
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -32,6 +36,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web_config.vm.hostname = "web"
     web_config.vm.network :private_network, :ip => "192.168.33.12"
   end
+
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
