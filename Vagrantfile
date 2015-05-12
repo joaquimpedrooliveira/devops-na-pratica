@@ -37,6 +37,11 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web_config.vm.network :private_network, :ip => "192.168.33.12"
   end
 
+  #Servidor de monitoramento
+  config.vm.define :monitor do |monitor_config|
+    monitor_config.vm.hostname = "monitor"
+    monitor_config.vm.network :private_network, :ip => "192.168.33.14"
+  end
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
