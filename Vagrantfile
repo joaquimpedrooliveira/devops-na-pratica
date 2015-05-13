@@ -40,6 +40,15 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web_config.vm.network :private_network, :ip => "192.168.33.12"
   end
 
+  #Servidor de aplicação para Puppet
+  config.vm.define :web2 do |web_config|
+    web_config.vm.hostname = "web2"
+    web_config.vm.network :private_network, :ip => "192.168.33.13"
+    web_config.vm.provision "puppet" do |puppet|
+        puppet.manifest_file = "web.pp"
+    end
+  end
+
   #Servidor de monitoramento
   config.vm.define :monitor do |monitor_config|
     monitor_config.vm.hostname = "monitor"
