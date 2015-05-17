@@ -33,7 +33,7 @@ class mysql-server {
 	}
 }
 
-define mysql-db($schema, $user => $title, $password) {
+define mysql-db($schema, $user = $title, $password) {
 	Class['mysql-server'] -> Mysql-db[$title]
 
 	exec { "$title-schema":
