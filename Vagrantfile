@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     db_config.vm.hostname = "db"
     db_config.vm.network :private_network, :ip => "192.168.33.10"
     db_config.vm.provision "puppet" do |puppet|
+        puppet.module_path = "modules"
         puppet.manifest_file = "db.pp"
     end
   end
