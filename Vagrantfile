@@ -33,19 +33,14 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   #Servidor de aplicação
   config.vm.define :web do |web_config|
-    web_config.vm.hostname = "web"
-    web_config.vm.network :private_network, :ip => "192.168.33.12"
-
     #Aumenta a memória padrão da VM somente para essa instância.
     web_config.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-  end
 
-  #Servidor de aplicação para Puppet
-  config.vm.define :web2 do |web_config|
-    web_config.vm.hostname = "web2"
-    web_config.vm.network :private_network, :ip => "192.168.33.13"
+    web_config.vm.hostname = "web"
+    web_config.vm.network :private_network, :ip => "192.168.33.12"
+
     web_config.vm.provision "puppet" do |puppet|
         puppet.module_path = "modules"
         puppet.manifest_file = "web.pp"
