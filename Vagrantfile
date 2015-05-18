@@ -47,6 +47,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web_config.vm.hostname = "web2"
     web_config.vm.network :private_network, :ip => "192.168.33.13"
     web_config.vm.provision "puppet" do |puppet|
+        puppet.module_path = "modules"
         puppet.manifest_file = "web.pp"
     end
   end
