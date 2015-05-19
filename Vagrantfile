@@ -16,6 +16,8 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "hashicorp/precise32"
 
+  config.librarian_puppet.puppetfile_dir = "librarian"
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -26,7 +28,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     db_config.vm.hostname = "db"
     db_config.vm.network :private_network, :ip => "192.168.33.10"
     db_config.vm.provision "puppet" do |puppet|
-        puppet.module_path = "modules"
+        puppet.module_path = ["modules", "librarian/modules"]
         puppet.manifest_file = "db.pp"
     end
   end
@@ -42,7 +44,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web_config.vm.network :private_network, :ip => "192.168.33.12"
 
     web_config.vm.provision "puppet" do |puppet|
-        puppet.module_path = "modules"
+        puppet.module_path = ["modules", "librarian/modules"]
         puppet.manifest_file = "web.pp"
     end
   end
