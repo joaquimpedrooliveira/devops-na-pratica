@@ -55,6 +55,17 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     monitor_config.vm.network :private_network, :ip => "192.168.33.14"
   end
 
+  #Servidor de IC
+  config.vm.define :ci do |build_config|
+    build_config.vm.hostname = "build"
+    build_config.vm.network :private_network, :ip => "192.168.33.16"
+    build_config.vm.provision "puppet" do |puppet|
+        puppet.module_path = ["modules", "librarian/modules"]
+        puppet.manifest_file = "ci.pp"
+    end
+  end
+
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
