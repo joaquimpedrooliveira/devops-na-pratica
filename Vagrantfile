@@ -59,6 +59,12 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
   config.vm.define :ci do |build_config|
     build_config.vm.hostname = "build"
     build_config.vm.network :private_network, :ip => "192.168.33.16"
+
+    #Aumenta a memória padrão da VM somente para essa instância.
+    build_config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512"]
+    end
+
     build_config.vm.provision "puppet" do |puppet|
         puppet.module_path = ["modules", "librarian/modules"]
         puppet.manifest_file = "ci.pp"

@@ -1,8 +1,14 @@
 class loja_virtual::ci {
 	include loja_virtual
 
-	package { ['git', 'maven', 'openjdk-6-jdk']:
+	package { ['git', 'maven', 'openjdk-6-jdk', 'rubygems']:
 		ensure => "installed",
+	}
+
+	package { 'fpm':
+		ensure 		=> installed,
+		provider 	=> 'gem',
+		require		=>  Package['rubygems'],
 	}
 
 	class { 'jenkins':
@@ -43,11 +49,13 @@ class loja_virtual::ci {
 	$git_poll_interval = '* * * * *'
 	$maven_goal = "install"
 	$archive_artifacts = 'combined/target/*.war'
+	$repo_dir = '/var/lib/apt/repo'
+	$repo_name = 'devopspkgs'
 
 	file { $job_structure:
 		ensure	=> 'directory',
 		owner	=> 'jenkins',
-		group   => 'jenkins'
+		group   => 'jenkins',
 		require	=> Class['jenkins::package'],
 	}
 
@@ -55,8 +63,13 @@ class loja_virtual::ci {
 		mode    => 0644,
 		owner	=> 'jenkins',
 		group   => 'jenkins',
-		content	=> template('loja_virtual/confi.xml'),
+		content	=> template('loja_virtual/config.xml'),
 		require	=> File[$job_structure],
 		notify	=> Service['jenkins'],
 	}
+
+	class { 'loja_virtual::repo' :
+		basedir => $repo_dir,
+		name    => $repo_name,
+	}	
 }

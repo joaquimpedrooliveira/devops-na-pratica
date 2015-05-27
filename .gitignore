@@ -1,0 +1,5 @@
+modules/loja_virtual/files/devopsnapratica.war
+librarian/.librarian
+librarian/.tmp
+librarian/*.lock
+librarian/modules
