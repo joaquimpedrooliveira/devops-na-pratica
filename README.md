@@ -7,11 +7,11 @@ Pré-requisitos:
 2. Instalar o [Vagrant](https://www.vagrantup.com/)
 3. Adicionar ao Vagrant o box "precise32":
 ```bash
-vagrant box add hashicorp/precise32
+$ vagrant box add hashicorp/precise32
 ```
 4.Instalar o plugin vagrant-librarian-puppet: 
 ```bash
-vagrant plugin install vagrant-librarian-puppet
+$ vagrant plugin install vagrant-librarian-puppet
 ```
 
 
