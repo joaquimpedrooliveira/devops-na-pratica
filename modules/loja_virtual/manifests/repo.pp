@@ -8,7 +8,7 @@ class loja_virtual::repo($basedir, $name){
 		"$basedir/conf",
 	]
 
-	file { "$repo_structure" :
+	file { $repo_structure:
 		ensure	=> 'directory',
 		owner	=> 'jenkins',
 		group   => 'jenkins',
@@ -19,7 +19,7 @@ class loja_virtual::repo($basedir, $name){
 		owner	=> 'jenkins',
 		group   => 'jenkins',
 		content	=> template('loja_virtual/distributions.erb'),
-		require	=> File['$basedir/conf'],
+		require	=> File["$basedir/conf"],
 	}
 
 	class { 'apache' : }
