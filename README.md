@@ -1,5 +1,5 @@
 # devops-na-pratica
-Exercícios do livro DevOps na prática
+Exercícios do livro DevOps na Prática
 
 Pré-requisitos:
 
@@ -9,7 +9,7 @@ Pré-requisitos:
 ```bash
 $ vagrant box add hashicorp/precise32
 ```
-4.Instalar o plugin vagrant-librarian-puppet: 
+4. Instalar o plugin vagrant-librarian-puppet: 
 ```bash
 $ vagrant plugin install vagrant-librarian-puppet
 ```
